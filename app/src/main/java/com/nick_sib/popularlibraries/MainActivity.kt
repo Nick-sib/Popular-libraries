@@ -2,7 +2,6 @@ package com.nick_sib.popularlibraries
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainView  {
@@ -11,7 +10,9 @@ class MainActivity : AppCompatActivity(), MainView  {
         listOf(btn_counter1, btn_counter2, btn_counter3)
     }
 
-    private val presenter = MainPresenter(this)
+    private val presenter by lazy {
+        MainPresenter(this, buttons.size)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
