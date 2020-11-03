@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/btn_counter1"
+        android:id="@+id/btnCounter1"
         style="@style/DefaultButtonStyle"
         tools:text="0"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,12 +27,12 @@
         android:id="@+id/tv_2"
         style="@style/DefaultTextViewStyle"
         android:text="@string/counter_two"
-        app:layout_constraintTop_toBottomOf="@id/btn_counter1"
+        app:layout_constraintTop_toBottomOf="@id/btnCounter1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
-        android:id="@+id/btn_counter2"
+        android:id="@+id/btnCounter2"
         style="@style/DefaultButtonStyle"
         tools:text="0"
         app:layout_constraintTop_toBottomOf="@id/tv_2"
@@ -43,12 +43,12 @@
         android:id="@+id/tv_3"
         style="@style/DefaultTextViewStyle"
         android:text="@string/counter_three"
-        app:layout_constraintTop_toBottomOf="@id/btn_counter2"
+        app:layout_constraintTop_toBottomOf="@id/btnCounter2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
-        android:id="@+id/btn_counter3"
+        android:id="@+id/btnCounter3"
         style="@style/DefaultButtonStyle"
         tools:text="0"
         app:layout_constraintTop_toBottomOf="@id/tv_3"

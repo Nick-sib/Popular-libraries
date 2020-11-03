@@ -8,4 +8,6 @@ class MainPresenter (private val view: MainView, size: Int) {
         view.setButtonText(index, nextValue.toString())
     }
 
+    fun fillButton(index: Int) = model.getCurrent(index).toString()
+
 }

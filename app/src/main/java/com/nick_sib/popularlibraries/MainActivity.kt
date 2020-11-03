@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MainView  {
 
     private val buttons by lazy {
-        listOf(btn_counter1, btn_counter2, btn_counter3)
+        listOf(btnCounter1, btnCounter2, btnCounter3)
     }
 
     private val presenter by lazy {
@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity(), MainView  {
             button.setOnClickListener {
                 presenter.counterClick(index)
             }
+            button.text = presenter.fillButton(index)
         }
-
     }
 
     override fun setButtonText(index: Int, text: String) {
