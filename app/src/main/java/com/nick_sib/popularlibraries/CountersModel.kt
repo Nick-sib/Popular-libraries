@@ -1,16 +1,17 @@
 package com.nick_sib.popularlibraries
 
+
+/**
+ * @param size - count of working buttons*/
 class CountersModel(size: Int) {
     private val counters = MutableList(size) { 0 }
 
-    fun getCurrent(index: Int): Int {
-        return counters[index]
-    }
+    /**
+     * @param index - index of clicked button*/
+    fun getCurrent(index: Int) = counters[index]
 
-    fun next(index: Int): Int {
-        counters[index]++
-        return getCurrent(index)
-    }
+    fun next(index: Int) = ++counters[index]
+
 
     fun set(index: Int, value: Int){
         counters[index] = value
