@@ -1,15 +1,21 @@
 package com.nick_sib.popularlibraries
 
-/**
- * @param size - count of working buttons
- * @param view - interfaced activity*/
-class MainPresenter (private val view: MainView, size: Int) {
-    private val model = CountersModel.getInstance(size)
+import moxy.MvpPresenter
 
-    fun counterClick(index: Int){
-        view.setButtonText(index, model.next(index).toString())
+class MainPresenter(private val model: CountersModel): MvpPresenter<MainView>() {
+
+    fun counterOneClick() {
+        val nextValue = model.next(0)
+        viewState.setButtonOneText(nextValue.toString())
     }
 
-    fun fillButton(index: Int) = model.getCurrent(index).toString()
+    fun counterTwoClick() {
+        val nextValue = model.next(1)
+        viewState.setButtonTwoText(nextValue.toString())
+    }
 
+    fun counterThreeClick() {
+        val nextValue = model.next(2)
+        viewState.setButtonThreeText(nextValue.toString())
+    }
 }
