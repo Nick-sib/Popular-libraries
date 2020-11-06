@@ -1,6 +1,5 @@
 package com.nick_sib.popularlibraries.ui.main
 
-
 import android.os.Bundle
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
@@ -15,7 +14,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private val navigatorHolder = App.instance.navigatorHolder
     private val navigator = SupportAppNavigator(this, supportFragmentManager, R.id.container)
 
-    private val presenter: MainPresenter by moxyPresenter { MainPresenter(App.instance.router) }
+    private val presenter: MainPresenter by moxyPresenter {
+        MainPresenter(App.instance.router)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

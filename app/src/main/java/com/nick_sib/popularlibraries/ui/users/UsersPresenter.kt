@@ -6,9 +6,15 @@ import com.nick_sib.popularlibraries.ui.adapter.IUserListPresenter
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
-class UsersPresenter(private val usersRepo: GithubUsersRepo, private val router: Router) : MvpPresenter<UsersView>() {
+class UsersPresenter(
+    private val usersRepo: GithubUsersRepo,
+    private val router: Router
+) : MvpPresenter<UsersView>() {
+
     class UsersListPresenter : IUserListPresenter {
+
         val users = mutableListOf<GithubUser>()
+
         override var itemClickListener: ((UserItemView) -> Unit)? = null
 
         override fun getCount() = users.size
