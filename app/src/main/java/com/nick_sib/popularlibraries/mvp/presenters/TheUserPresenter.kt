@@ -1,8 +1,9 @@
-package com.nick_sib.popularlibraries.ui.theuser
+package com.nick_sib.popularlibraries.mvp.presenters
 
-import com.nick_sib.popularlibraries.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.view.TheUserView
 import moxy.MvpPresenter
-
+/**Презентер отдельного пользователя по которому кликнули*/
 class TheUserPresenter (
     private val usersRepo: GithubUsersRepo,
 ) : MvpPresenter<TheUserView>() {
@@ -10,10 +11,8 @@ class TheUserPresenter (
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-
     }
 
     fun theUserData(userIndex: Int) = usersRepo.getUser(userIndex)
-
 
 }

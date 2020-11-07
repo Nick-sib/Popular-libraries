@@ -1,4 +1,4 @@
-package com.nick_sib.popularlibraries.model.entity
+package com.nick_sib.popularlibraries.mvp.model.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

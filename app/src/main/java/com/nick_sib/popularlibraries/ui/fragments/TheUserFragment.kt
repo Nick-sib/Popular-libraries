@@ -1,11 +1,13 @@
-package com.nick_sib.popularlibraries.ui.theuser
+package com.nick_sib.popularlibraries.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
+import com.nick_sib.popularlibraries.mvp.view.TheUserView
 import kotlinx.android.synthetic.main.fragment_theuser.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -22,6 +24,7 @@ class TheUserFragment: MvpAppCompatFragment(), TheUserView {
         }
     }
 
+    //TODO: перевести получение данных пользователя не по позиции а по ID
     private var userIndex: Int = 0
 
     private val presenter: TheUserPresenter by moxyPresenter {

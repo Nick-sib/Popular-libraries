@@ -4,6 +4,8 @@ import android.os.Bundle
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.navigation.BackButtonListener
+import com.nick_sib.popularlibraries.mvp.presenters.MainPresenter
+import com.nick_sib.popularlibraries.mvp.view.MainView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.terrakok.cicerone.android.support.SupportAppNavigator

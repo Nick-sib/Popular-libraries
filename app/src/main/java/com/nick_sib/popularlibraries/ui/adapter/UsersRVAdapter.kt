@@ -5,7 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.ui.users.UserItemView
+import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
+import com.nick_sib.popularlibraries.mvp.view.UserItemView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_user.view.*
 

@@ -1,6 +1,7 @@
-package com.nick_sib.popularlibraries.ui.main
+package com.nick_sib.popularlibraries.mvp.presenters
 
 import com.nick_sib.popularlibraries.navigation.Screens
+import com.nick_sib.popularlibraries.mvp.view.MainView
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 

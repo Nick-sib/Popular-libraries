@@ -1,7 +1,7 @@
 package com.nick_sib.popularlibraries.navigation
 
-import com.nick_sib.popularlibraries.ui.theuser.TheUserFragment
-import com.nick_sib.popularlibraries.ui.users.UsersFragment
+import com.nick_sib.popularlibraries.ui.fragments.TheUserFragment
+import com.nick_sib.popularlibraries.ui.fragments.UsersFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class Screens {

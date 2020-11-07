@@ -1,4 +1,4 @@
-package com.nick_sib.popularlibraries.ui.theuser
+package com.nick_sib.popularlibraries.mvp.view
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

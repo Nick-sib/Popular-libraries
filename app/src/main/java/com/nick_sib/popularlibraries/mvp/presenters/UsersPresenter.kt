@@ -1,10 +1,12 @@
-package com.nick_sib.popularlibraries.ui.users
+package com.nick_sib.popularlibraries.mvp.presenters
 
 import android.util.Log
-import com.nick_sib.popularlibraries.model.entity.GithubUser
-import com.nick_sib.popularlibraries.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
+import com.nick_sib.popularlibraries.mvp.model.GithubUsersRepo
 import com.nick_sib.popularlibraries.navigation.Screens
-import com.nick_sib.popularlibraries.ui.adapter.IUserListPresenter
+import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
+import com.nick_sib.popularlibraries.mvp.view.UserItemView
+import com.nick_sib.popularlibraries.mvp.view.UsersView
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
