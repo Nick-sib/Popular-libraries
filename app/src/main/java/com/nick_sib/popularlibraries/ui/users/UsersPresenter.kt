@@ -1,7 +1,9 @@
 package com.nick_sib.popularlibraries.ui.users
 
+import android.util.Log
 import com.nick_sib.popularlibraries.repo.GithubUser
 import com.nick_sib.popularlibraries.repo.GithubUsersRepo
+import com.nick_sib.popularlibraries.ui.Screens
 import com.nick_sib.popularlibraries.ui.adapter.IUserListPresenter
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -33,7 +35,8 @@ class UsersPresenter(
         loadData()
 
         usersListPresenter.itemClickListener = {
-            //TODO: переход на экран пользователя c помощью router.navigateTo
+            Log.d("myLOG", "onFirstViewAttach: ${it.pos}")
+            router.navigateTo(Screens.TheUserScreen(it.pos))
         }
     }
 
