@@ -3,7 +3,7 @@ package com.nick_sib.popularlibraries.ui.main
 import android.os.Bundle
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.ui.BackButtonListener
+import com.nick_sib.popularlibraries.navigation.BackButtonListener
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.terrakok.cicerone.android.support.SupportAppNavigator

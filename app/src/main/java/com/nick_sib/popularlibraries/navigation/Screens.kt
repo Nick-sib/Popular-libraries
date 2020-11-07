@@ -1,4 +1,4 @@
-package com.nick_sib.popularlibraries.ui
+package com.nick_sib.popularlibraries.navigation
 
 import com.nick_sib.popularlibraries.ui.theuser.TheUserFragment
 import com.nick_sib.popularlibraries.ui.users.UsersFragment

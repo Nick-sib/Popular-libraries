@@ -1,6 +1,6 @@
 package com.nick_sib.popularlibraries.ui.main
 
-import com.nick_sib.popularlibraries.ui.Screens
+import com.nick_sib.popularlibraries.navigation.Screens
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 

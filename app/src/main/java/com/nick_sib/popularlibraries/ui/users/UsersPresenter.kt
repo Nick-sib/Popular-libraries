@@ -1,9 +1,9 @@
 package com.nick_sib.popularlibraries.ui.users
 
 import android.util.Log
-import com.nick_sib.popularlibraries.repo.GithubUser
-import com.nick_sib.popularlibraries.repo.GithubUsersRepo
-import com.nick_sib.popularlibraries.ui.Screens
+import com.nick_sib.popularlibraries.model.entity.GithubUser
+import com.nick_sib.popularlibraries.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.navigation.Screens
 import com.nick_sib.popularlibraries.ui.adapter.IUserListPresenter
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -46,9 +46,5 @@ class UsersPresenter(
         viewState.updateList()
     }
 
-    fun backPressed(): Boolean {
-        router.exit()
-        return true
-    }
 
 }

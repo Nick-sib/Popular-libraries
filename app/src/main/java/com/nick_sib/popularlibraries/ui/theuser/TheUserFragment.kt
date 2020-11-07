@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.repo.GithubUsersRepo
-import com.nick_sib.popularlibraries.ui.users.UsersPresenter
+import com.nick_sib.popularlibraries.model.GithubUsersRepo
 import kotlinx.android.synthetic.main.fragment_theuser.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -27,7 +25,7 @@ class TheUserFragment: MvpAppCompatFragment(), TheUserView {
     private var userIndex: Int = 0
 
     private val presenter: TheUserPresenter by moxyPresenter {
-        TheUserPresenter(GithubUsersRepo(), App.instance.router)
+        TheUserPresenter(GithubUsersRepo())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

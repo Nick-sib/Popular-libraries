@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.repo.GithubUsersRepo
+import com.nick_sib.popularlibraries.model.GithubUsersRepo
 import com.nick_sib.popularlibraries.ui.adapter.UsersRVAdapter
 import kotlinx.android.synthetic.main.fragment_users.*
 import moxy.MvpAppCompatFragment

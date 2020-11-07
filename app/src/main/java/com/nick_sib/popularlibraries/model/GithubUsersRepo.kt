@@ -1,4 +1,6 @@
-package com.nick_sib.popularlibraries.repo
+package com.nick_sib.popularlibraries.model
+
+import com.nick_sib.popularlibraries.model.entity.GithubUser
 
 class GithubUsersRepo {
     private val repositories = listOf(
