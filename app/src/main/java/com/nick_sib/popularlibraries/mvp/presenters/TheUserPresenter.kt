@@ -14,38 +14,22 @@ class TheUserPresenter (
     lateinit var theUserData: GithubUser
     var userIndex: Int? = null
 
-    private val usersListObserver = object : Observer<GithubUser> {
-        override fun onSubscribe(d: Disposable?) {
-            viewState.beginLoading()
-        }
-        override fun onNext(users: GithubUser?) {
-            users?.run {
-                theUserData = this
-                viewState.endLoading()
-            } ?: run {
-                viewState.showError("Empty data")
-            }
-        }
-
-        override fun onError(e: Throwable?) {
-            viewState.showError(e.toString())
-        }
-
-        override fun onComplete() {
-            viewState.endLoading()
-        }
-    }
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         loadData()
     }
 
     private fun loadData() {
+        viewState.beginLoading()
         userIndex?.run {
-            usersRepo.getUserRX(this).subscribe(usersListObserver)
+            usersRepo.getUserRX(this)
+                . subscribe {
+                    it?.let {
+                        theUserData = it
+                    } ?: viewState.showError("Empty user ID")
+                }
         } ?: viewState.showError("Empty user ID")
-
+        viewState.endLoading()
     }
 
 }
