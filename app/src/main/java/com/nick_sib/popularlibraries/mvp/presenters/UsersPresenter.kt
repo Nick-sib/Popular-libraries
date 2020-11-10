@@ -7,6 +7,8 @@ import com.nick_sib.popularlibraries.navigation.Screens
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.view.UserItemView
 import com.nick_sib.popularlibraries.mvp.view.UsersView
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 
@@ -29,6 +31,28 @@ class UsersPresenter(
         }
     }
 
+    private val usersListObserver = object : Observer<GithubUser> {
+        override fun onSubscribe(d: Disposable?) {
+            //можно сделать диалог с отменой загузки
+            viewState.beginLoading()
+        }
+        override fun onNext(users: GithubUser?) {
+            users?.run {
+                usersListPresenter.users.add(this)
+                viewState.updateList()
+            } ?: run {
+                Log.d("myLOG", "onNext: ")
+                viewState.showError("Empty data")
+            }
+        }
+        override fun onError(e: Throwable?) {
+            viewState.showError(e.toString())
+        }
+        override fun onComplete() {
+            viewState.endLoading()
+        }
+    }
+
     val usersListPresenter = UsersListPresenter()
 
     override fun onFirstViewAttach() {
@@ -43,9 +67,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        val users = usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
-        viewState.updateList()
+        usersRepo.getUsersRX().subscribe(usersListObserver)
     }
 
 
