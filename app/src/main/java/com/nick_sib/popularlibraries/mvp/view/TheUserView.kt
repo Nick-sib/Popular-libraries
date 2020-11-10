@@ -6,5 +6,11 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface TheUserView: MvpView {
-    fun init()
+    //просто чтобы отличалось от UsersView хотя разумнее делать индентично
+    //и добавить fun init() fun updateList()
+
+    fun beginLoading()
+    fun endLoading()
+    fun showError(errorText: String)
+
 }

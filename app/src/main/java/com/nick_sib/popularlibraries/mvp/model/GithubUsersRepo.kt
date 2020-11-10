@@ -29,5 +29,6 @@ class GithubUsersRepo {
         }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getUser(userIndex: Int) : GithubUser = repositories[userIndex]
+    fun getUserRX(userIndex: Int): Observable<GithubUser> =
+        Observable.just(repositories[userIndex])
 }

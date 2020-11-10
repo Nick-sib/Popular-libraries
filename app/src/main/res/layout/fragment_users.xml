@@ -18,8 +18,8 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="@dimen/progressbar_size"
+        android:layout_height="@dimen/progressbar_size"
         android:indeterminateDrawable="@drawable/spinner_ring"
         android:indeterminateOnly="true"
         android:visibility="gone"
