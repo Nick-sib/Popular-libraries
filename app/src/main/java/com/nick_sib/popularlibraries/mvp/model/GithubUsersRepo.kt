@@ -30,5 +30,8 @@ class GithubUsersRepo {
     }
 
     fun getUserRX(userIndex: Int): Observable<GithubUser> =
-        Observable.just(repositories[userIndex])
+        Observable
+            .just(repositories[userIndex])
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 }
