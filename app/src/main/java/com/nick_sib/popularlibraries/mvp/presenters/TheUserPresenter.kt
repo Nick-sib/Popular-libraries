@@ -3,9 +3,8 @@ package com.nick_sib.popularlibraries.mvp.presenters
 import com.nick_sib.popularlibraries.mvp.model.GithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.view.TheUserView
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
+
 /**Презентер отдельного пользователя по которому кликнули*/
 class TheUserPresenter (
     private val usersRepo: GithubUsersRepo,
@@ -23,13 +22,13 @@ class TheUserPresenter (
         viewState.beginLoading()
         userIndex?.run {
             usersRepo.getUserRX(this)
-                . subscribe {
-                    it?.let {
-                        theUserData = it
-                    } ?: viewState.showError("Empty user ID")
-                }
+                .subscribe(
+                    {data -> theUserData = data},
+                    {err -> viewState.showError(err.toString())},
+                    {viewState.endLoading()}
+                )
         } ?: viewState.showError("Empty user ID")
-        viewState.endLoading()
+
     }
 
 }
