@@ -1,0 +1,52 @@
+package com.nick_sib.popularlibraries.mvp.presenters
+
+import android.util.Log
+import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
+import com.nick_sib.popularlibraries.mvp.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.navigation.Screens
+import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
+import com.nick_sib.popularlibraries.mvp.view.UserItemView
+import com.nick_sib.popularlibraries.mvp.view.UsersView
+import moxy.MvpPresenter
+import ru.terrakok.cicerone.Router
+
+class UsersPresenter(
+    private val usersRepo: GithubUsersRepo,
+    private val router: Router
+) : MvpPresenter<UsersView>() {
+
+    class UsersListPresenter : IUserListPresenter {
+
+        val users = mutableListOf<GithubUser>()
+
+        override var itemClickListener: ((UserItemView) -> Unit)? = null
+
+        override fun getCount() = users.size
+
+        override fun bindView(view: UserItemView) {
+            val user = users[view.pos]
+            view.setLogin(user.login)
+        }
+    }
+
+    val usersListPresenter = UsersListPresenter()
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.init()
+        loadData()
+
+        usersListPresenter.itemClickListener = {
+            Log.d("myLOG", "onFirstViewAttach: ${it.pos}")
+            router.navigateTo(Screens.TheUserScreen(it.pos))
+        }
+    }
+
+    private fun loadData() {
+        val users = usersRepo.getUsers()
+        usersListPresenter.users.addAll(users)
+        viewState.updateList()
+    }
+
+
+}
