@@ -3,6 +3,7 @@ buildscript {
     ext{
         kotlin_version = "1.4.10"
         moxy_version = "2.1.2"
+        rx_version = "3.0.0"
     }
     repositories {
         google()

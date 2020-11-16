@@ -8,4 +8,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface UsersView : MvpView {
     fun init()
     fun updateList()
+    fun beginLoading()
+    fun endLoading()
+    fun showError(errorText: String)
 }
