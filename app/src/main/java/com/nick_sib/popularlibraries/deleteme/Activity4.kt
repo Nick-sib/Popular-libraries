@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -76,8 +77,11 @@ class Activity4 : MvpAppCompatActivity(), Activity4View {
         if (requestCode != REQUEST_CODE || resultCode != RESULT_OK) return
 
         resultData?.run {
-            data?.also {
-                presenter.convertImage(this@Activity4, it)
+            data?.also {imagePath ->
+                getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.also {imagesRoot ->
+                    presenter.convertImage(imagePath, imagesRoot.toString())
+                }
+
             }
         }
     }
