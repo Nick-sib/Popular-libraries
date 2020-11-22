@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.nick_sib.popularlibraries.R
+import com.nick_sib.popularlibraries.databinding.Activity4Binding
+import com.nick_sib.popularlibraries.databinding.ItemUserBinding
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.view.image.IImageLoader
 import com.nick_sib.popularlibraries.mvp.view.UserItemView
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_user.view.*
 
 class UsersRVAdapter(
     private val presenter: IUserListPresenter,
@@ -29,8 +30,10 @@ class UsersRVAdapter(
     }
 
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer, UserItemView {
+        private var binding: ItemUserBinding = ItemUserBinding.bind(containerView)
+
         override var pos = -1
-        override fun setLogin(text: String) = with(containerView) { tv_login.text = text }
-        override fun loadAvatar(url: String) = with(containerView) { imageLoader.loadInto(url, iv_avatar) }
+        override fun setLogin(text: String) = with(containerView) { binding.tvLogin.text = text }
+        override fun loadAvatar(url: String) = with(containerView) { imageLoader.loadInto(url, binding.ivAvatar) }
     }
 }

@@ -21,9 +21,9 @@ object ModelLesson4 {
 
 
 
-    fun convert(imagePath: String, imagesRoot: String): ConnectableObservable<Int> =
+    fun convert(imagePathIn: String, imagesRoot: String): ConnectableObservable<Int> =
         Observable.create<Int>{ emitter ->
-            val imagePath: Uri = imagePath.toUri()
+            val imagePath: Uri = imagePathIn.toUri()
 
             for (i in 1 until MAX_STEPS) {
                 Thread.sleep(1000)
@@ -47,12 +47,4 @@ object ModelLesson4 {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .publish()
-
-
-
-
-
-
-
-
 }

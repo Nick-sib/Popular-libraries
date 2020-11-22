@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
 import com.nick_sib.popularlibraries.mvp.view.TheUserView
-import kotlinx.android.synthetic.main.fragment_theuser.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -42,12 +41,12 @@ class TheUserFragment : MvpAppCompatFragment(), TheUserView {
     }
     
     override fun beginLoading() {
-        progressBar.visibility = View.VISIBLE
+        //progressBar.visibility = View.VISIBLE
     }
 
     override fun endLoading() {
        //tv_login.text =  presenter.theUserData.login
-        progressBar.visibility = View.GONE
+       // progressBar.visibility = View.GONE
     }
 
     override fun showError(errorText: String) {

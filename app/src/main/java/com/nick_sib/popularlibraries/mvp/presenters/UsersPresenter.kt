@@ -36,8 +36,8 @@ class UsersPresenter(
         viewState.init()
         loadData()
 
-        usersListPresenter.itemClickListener = { itemView ->
-            val user = usersListPresenter.users[itemView.pos]
+        usersListPresenter.itemClickListener = { //itemView ->
+            //val user = usersListPresenter.users[itemView.pos]
             //router.navigateTo(Screens.TheUserScreen(user))
         }
     }

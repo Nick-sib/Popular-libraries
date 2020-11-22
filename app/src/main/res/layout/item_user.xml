@@ -11,7 +11,7 @@
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
-        android:id="@+id/iv_avatar"
+        android:id="@+id/ivAvatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
@@ -19,7 +19,7 @@
         android:contentDescription="@string/github_user_avatar"/>
 
     <TextView
-        android:id="@+id/tv_login"
+        android:id="@+id/tvLogin"
         tools:text="TEXT TEXT TEXT"
         style="@style/DefaultTextViewStyle"
         android:layout_marginStart="@dimen/global_layout_offset"/>
