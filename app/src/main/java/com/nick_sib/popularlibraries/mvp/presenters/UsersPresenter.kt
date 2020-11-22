@@ -6,6 +6,7 @@ import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.model.repo.IGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.view.UserItemView
 import com.nick_sib.popularlibraries.mvp.view.UsersView
+import com.nick_sib.popularlibraries.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
@@ -36,9 +37,9 @@ class UsersPresenter(
         viewState.init()
         loadData()
 
-        usersListPresenter.itemClickListener = { //itemView ->
-            //val user = usersListPresenter.users[itemView.pos]
-            //router.navigateTo(Screens.TheUserScreen(user))
+        usersListPresenter.itemClickListener = { itemView ->
+            val user = usersListPresenter.users[itemView.pos]
+            router.navigateTo(Screens.TheUserScreen(user))
         }
     }
 

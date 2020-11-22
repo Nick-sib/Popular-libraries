@@ -5,7 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
+import com.bumptech.glide.Glide
+import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.R
+import com.nick_sib.popularlibraries.databinding.FragmentTheuserBinding
+import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
+import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
+import com.nick_sib.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
 import com.nick_sib.popularlibraries.mvp.view.TheUserView
 import moxy.MvpAppCompatFragment
@@ -14,30 +21,53 @@ import moxy.ktx.moxyPresenter
 class TheUserFragment : MvpAppCompatFragment(), TheUserView {
 
     companion object {
-        private const val USER_INDEX = "user_index"
+        private const val USER_DATA = "user_data"
 
-        fun newInstance(userIndex: Int) = TheUserFragment().apply{
+        fun newInstance(userData: GithubUser) = TheUserFragment().apply{
             arguments = Bundle().apply {
-                putInt(USER_INDEX, userIndex)
+                putParcelable(USER_DATA, userData)
             }
         }
     }
 
+    private var binding: FragmentTheuserBinding? = null
 
-//    private val presenter: TheUserPresenter by moxyPresenter {
-//        TheUserPresenter(GithubUsersRepo())
-//    }
+
+    private val presenter: TheUserPresenter by moxyPresenter {
+        TheUserPresenter(RetrofitGithubUsersRepo(ApiHolder.api))
+    }
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View =  View.inflate(context, R.layout.fragment_theuser, null)
+    ): View  = FragmentTheuserBinding.inflate(inflater, container, false).let {
+        binding = it
+        it.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //presenter.userIndex = arguments?.getInt(USER_INDEX) ?: 0
+        presenter.theUserData = arguments?.getParcelable(USER_DATA)
+            ?: GithubUser(null, null, null)
+    }
+
+    override fun init() {
+        binding?.apply {
+            bitvLogin.text =  presenter.theUserData.login
+            bitvId.text =  presenter.theUserData.id
+            Glide.with(this@TheUserFragment)
+                .asBitmap()
+                .load(presenter.theUserData.avatarUrl)
+                .into(ivAvatar)
+        }
+
     }
     
     override fun beginLoading() {
@@ -45,7 +75,7 @@ class TheUserFragment : MvpAppCompatFragment(), TheUserView {
     }
 
     override fun endLoading() {
-       //tv_login.text =  presenter.theUserData.login
+
        // progressBar.visibility = View.GONE
     }
 

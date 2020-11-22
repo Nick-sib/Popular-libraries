@@ -1,5 +1,6 @@
 package com.nick_sib.popularlibraries.navigation
 
+import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.ui.fragments.TheUserFragment
 import com.nick_sib.popularlibraries.ui.fragments.UsersFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -9,8 +10,7 @@ class Screens {
         override fun getFragment() = UsersFragment.newInstance()
     }
 
-    class TheUserScreen(private var userIndex: Int) : SupportAppScreen() {
-
-        override fun getFragment() = TheUserFragment.newInstance(userIndex)
+    class TheUserScreen(private var userData: GithubUser) : SupportAppScreen() {
+        override fun getFragment() = TheUserFragment.newInstance(userData)
     }
 }

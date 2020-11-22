@@ -45,6 +45,10 @@ class UsersFragment : MvpAppCompatFragment(), UsersView {
         it.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
 
     override fun init() {
         binding?.apply {

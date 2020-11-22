@@ -1,23 +1,23 @@
 package com.nick_sib.popularlibraries.mvp.presenters
 
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
+import com.nick_sib.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.view.TheUserView
 import moxy.MvpPresenter
 
 /**Презентер отдельного пользователя по которому кликнули*/
-class TheUserPresenter () {
-//    private val usersRepo: GithubUserUsersRepo,
-//) : MvpPresenter<TheUserView>() {
-//
-//    lateinit var theUserData: GithubUser
-//    var userIndex: Int? = null
-//
-//    override fun onFirstViewAttach() {
-//        super.onFirstViewAttach()
-//        loadData()
-//    }
-//
-//    private fun loadData() {
+class TheUserPresenter (private val usersRepo: RetrofitGithubUsersRepo,
+) : MvpPresenter<TheUserView>() {
+
+    lateinit var theUserData: GithubUser
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.init()
+        loadData()
+    }
+
+    private fun loadData() {
 //        viewState.beginLoading()
 //        userIndex?.run {
 //            usersRepo.getUserRX(this)
@@ -28,6 +28,6 @@ class TheUserPresenter () {
 //                )
 //        } ?: viewState.showError("Empty user ID")
 //
-//    }
+    }
 
 }
