@@ -21,10 +21,10 @@ object ModelLesson4 {
 
 
 
-    fun convert(imagePath: Uri, imagesRoot: String): ConnectableObservable<Int> =
-
-
+    fun convert(imagePath: String, imagesRoot: String): ConnectableObservable<Int> =
         Observable.create<Int>{ emitter ->
+            val imagePath: Uri = imagePath.toUri()
+
             for (i in 1 until MAX_STEPS) {
                 Thread.sleep(1000)
                 emitter.onNext(i)

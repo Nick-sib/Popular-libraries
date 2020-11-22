@@ -7,7 +7,7 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface Activity4View: MvpView {
-    fun beginConvert(imagePath: Uri)
+    fun beginConvert(imagePath: String)
     fun endConvert(imagePath: Uri)
     fun progressConvert(progress: Int)
     fun showError(errorText: String)

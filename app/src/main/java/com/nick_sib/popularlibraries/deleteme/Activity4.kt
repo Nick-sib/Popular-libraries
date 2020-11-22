@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.nick_sib.popularlibraries.R
 import kotlinx.android.synthetic.main.activity_4.*
 import moxy.MvpAppCompatActivity
@@ -79,7 +80,7 @@ class Activity4 : MvpAppCompatActivity(), Activity4View {
         resultData?.run {
             data?.also {imagePath ->
                 getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.also {imagesRoot ->
-                    presenter.convertImage(imagePath, imagesRoot.toString())
+                    presenter.convertImage(imagePath.toString(), imagesRoot.toString())
                 }
 
             }
@@ -87,8 +88,8 @@ class Activity4 : MvpAppCompatActivity(), Activity4View {
     }
 
 
-    override fun beginConvert(imagePath: Uri) {
-        ivOriginal.setImageURI(imagePath)
+    override fun beginConvert(imagePath: String) {
+        ivOriginal.setImageURI(imagePath.toUri())
         alertDialog = AlertDialog.Builder(this).apply {
             setTitle("Conversation")
             setMessage("converting in progress!")

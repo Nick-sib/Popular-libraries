@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.mvp.model.GithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
 import com.nick_sib.popularlibraries.mvp.presenters.UsersPresenter
 import com.nick_sib.popularlibraries.mvp.view.UsersView
 import com.nick_sib.popularlibraries.ui.adapter.UsersRVAdapter
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_users.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-
 
 class UsersFragment : MvpAppCompatFragment(), UsersView {
     companion object {
@@ -22,11 +24,14 @@ class UsersFragment : MvpAppCompatFragment(), UsersView {
     }
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(GithubUsersRepo(), App.instance.router)
+        UsersPresenter(
+            AndroidSchedulers.mainThread(),
+            RetrofitGithubUsersRepo(ApiHolder.api),
+            App.instance.router)
     }
 
     private val adapter: UsersRVAdapter by lazy {
-        UsersRVAdapter(presenter.usersListPresenter)
+        UsersRVAdapter(presenter.usersListPresenter,  GlideImageLoader())
     }
 
     override fun onCreateView(
@@ -56,3 +61,4 @@ class UsersFragment : MvpAppCompatFragment(), UsersView {
         progressBar.visibility = View.GONE
     }
 }
+

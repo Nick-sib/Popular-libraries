@@ -1,7 +1,6 @@
 package com.nick_sib.popularlibraries.deleteme
 
 
-import android.net.Uri
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.observables.ConnectableObservable
@@ -14,12 +13,11 @@ class PresenterLesson4(private val model: ModelLesson4): MvpPresenter<Activity4V
 /**@param imagePath - путь к конвертируемой картинке
  * @param imagesRoot - путь к папке для результатов конвертирования
  * */
-    fun convertImage(imagePath: Uri, imagesRoot: String) {
+    fun convertImage(imagePath: String, imagesRoot: String) {
             val hotObservable: ConnectableObservable<Int> = model.convert(
                 imagePath,
                 imagesRoot
             )
-
 
             hotObservable.subscribe(object : Observer<Int> {
                 override fun onSubscribe(d: Disposable?) {

@@ -3,4 +3,5 @@
     <dimen name="global_layout_offset">16dp</dimen>
     <dimen name="spinner_size">50dip</dimen>
     <dimen name="progressbar_size">300dp</dimen>
+    <dimen name="global_list_offset">2dp</dimen>
 </resources>
