@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.databinding.Activity4Binding
 import com.nick_sib.popularlibraries.databinding.ItemUserBinding
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.view.image.IImageLoader
@@ -19,21 +18,33 @@ class UsersRVAdapter(
 ) : RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false))
+        ViewHolder(
+            LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.item_user, parent, false)
+        )
 
     override fun getItemCount() = presenter.getCount()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.pos = position
-        holder.containerView.setOnClickListener { presenter.itemClickListener?.invoke(holder) }
+        holder.containerView.setOnClickListener {
+            presenter.itemClickListener?.invoke(holder)
+        }
         presenter.bindView(holder)
     }
 
-    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer, UserItemView {
+    inner class ViewHolder(
+        override val containerView: View
+    ) : RecyclerView.ViewHolder(containerView), LayoutContainer, UserItemView {
         private var binding: ItemUserBinding = ItemUserBinding.bind(containerView)
 
         override var pos = -1
-        override fun setLogin(text: String) = with(containerView) { binding.tvLogin.text = text }
-        override fun loadAvatar(url: String) = with(containerView) { imageLoader.loadInto(url, binding.ivAvatar) }
+        override fun setLogin(text: String) {
+            binding.tvLogin.text = text
+        }
+        override fun loadAvatar(url: String)  {
+            imageLoader.loadInto(url, binding.ivAvatar)
+        }
     }
 }

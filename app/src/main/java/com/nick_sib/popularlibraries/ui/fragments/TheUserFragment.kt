@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.nick_sib.popularlibraries.ApiHolder
-import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.FragmentTheuserBinding
-import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
-import com.nick_sib.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
 import com.nick_sib.popularlibraries.mvp.view.TheUserView
 import moxy.MvpAppCompatFragment

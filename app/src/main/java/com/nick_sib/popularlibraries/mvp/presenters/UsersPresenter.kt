@@ -1,6 +1,7 @@
 package com.nick_sib.popularlibraries.mvp.presenters
 
 
+import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.model.repo.IGithubUsersRepo
@@ -14,7 +15,7 @@ import ru.terrakok.cicerone.Router
 class UsersPresenter(
     private val mainThreadScheduler: Scheduler,
     private val usersRepo: IGithubUsersRepo,
-    private val router: Router
+    private val router: Router = App.instance.router
 ) : MvpPresenter<UsersView>() {
 
     class UsersListPresenter : IUserListPresenter {
@@ -24,9 +25,12 @@ class UsersPresenter(
 
         override fun bindView(view: UserItemView) {
             val user = users[view.pos]
-            user.login?.let { view.setLogin(it) }
-            user.avatarUrl?.let {view.loadAvatar(it)}
-
+            user.login?.let {
+                view.setLogin(it)
+            }
+            user.avatarUrl?.let {
+                view.loadAvatar(it)
+            }
         }
     }
 

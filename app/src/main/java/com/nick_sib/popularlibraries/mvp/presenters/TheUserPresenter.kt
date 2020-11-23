@@ -1,7 +1,7 @@
 package com.nick_sib.popularlibraries.mvp.presenters
 
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
-import com.nick_sib.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.view.TheUserView
 import moxy.MvpPresenter
 

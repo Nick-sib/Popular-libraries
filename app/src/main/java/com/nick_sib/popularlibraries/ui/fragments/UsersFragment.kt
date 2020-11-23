@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
-import com.nick_sib.popularlibraries.mvp.model.repo.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
 import com.nick_sib.popularlibraries.mvp.presenters.UsersPresenter
 import com.nick_sib.popularlibraries.mvp.view.UsersView
