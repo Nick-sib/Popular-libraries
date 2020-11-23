@@ -12,13 +12,14 @@
         style="@style/DefaultImageViewStyle"
         android:layout_height="200dp"
         android:layout_width="200dp"
+        android:contentDescription="@string/iv_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/bitvId"
+        android:id="@+id/tvId"
         style="@style/GrayTextViewStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,16 +33,30 @@
         app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
         tools:text="TEXT TEXT TEXT" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvForks"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/global_layout_offset"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bitvLogin"
+        tools:layout_editor_absoluteX="16dp"
+        tools:listitem="@layout/item_fork" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="@dimen/progressbar_size"
         android:layout_height="@dimen/progressbar_size"
         android:indeterminateDrawable="@drawable/spinner_ring"
         android:indeterminateOnly="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@id/rvForks"
+        app:layout_constraintBottom_toBottomOf="@id/rvForks"
+        app:layout_constraintEnd_toEndOf="@id/rvForks"
+        app:layout_constraintStart_toStartOf="@id/rvForks" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
