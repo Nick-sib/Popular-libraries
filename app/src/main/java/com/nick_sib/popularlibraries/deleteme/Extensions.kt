@@ -38,7 +38,7 @@ fun loadImageO(context: Context, imagePath: Uri): Bitmap? =
     )
 
 @RequiresApi(Build.VERSION_CODES.P)
-fun loadImageP(context: Context, imagePath: Uri): Bitmap? {
+fun loadImageP(context: Context, imagePath: Uri): Bitmap {
     val source = ImageDecoder.createSource(context.contentResolver, imagePath)
     return ImageDecoder.decodeBitmap(source)
 }

@@ -1,11 +1,9 @@
 package com.nick_sib.popularlibraries.deleteme
 
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.observables.ConnectableObservable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
 

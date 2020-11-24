@@ -5,23 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toUri
-import com.bumptech.glide.Glide
 import com.nick_sib.popularlibraries.ApiHolder
-import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentForkBinding
-import com.nick_sib.popularlibraries.databinding.FragmentTheuserBinding
-import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.presenters.ForksPresenter
-import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.ui.adapter.ForkUsersRVAdapter
-import com.nick_sib.popularlibraries.ui.adapter.ForksRVAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
-import java.net.URL
 
 class ForkFragment : MvpAppCompatFragment() , LoadedView  {
 

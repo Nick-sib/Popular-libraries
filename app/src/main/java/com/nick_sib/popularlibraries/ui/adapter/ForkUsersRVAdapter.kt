@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.ItemSimpleTextBinding
+import com.nick_sib.popularlibraries.getUserName
 import com.nick_sib.popularlibraries.mvp.presenters.list.ForkUsersItemView
 import com.nick_sib.popularlibraries.mvp.presenters.list.IForkUsersListPresenter
 import kotlinx.android.extensions.LayoutContainer
@@ -40,7 +41,7 @@ class ForkUsersRVAdapter(
         override var pos = -1
 
         override fun setForkUserName(text: String) {
-            binding.tvName.text = text
+            binding.tvName.text = text.getUserName()
         }
     }
 }
