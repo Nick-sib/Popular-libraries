@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.databinding.FragmentForkBinding
-import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsers
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitRepoForks
 import com.nick_sib.popularlibraries.mvp.presenters.ForksPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.ui.adapter.ForkUsersRVAdapter
@@ -34,7 +35,7 @@ class ForkFragment : MvpAppCompatFragment() , LoadedView  {
     private val presenter: ForksPresenter by moxyPresenter {
         ForksPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api),
+            RetrofitRepoForks(ApiHolder.api),
             forkData)
     }
 

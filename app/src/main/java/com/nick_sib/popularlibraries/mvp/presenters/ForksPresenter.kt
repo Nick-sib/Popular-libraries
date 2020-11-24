@@ -1,7 +1,7 @@
 package com.nick_sib.popularlibraries.mvp.presenters
 
 import com.nick_sib.popularlibraries.mvp.model.entity.ForkUser
-import com.nick_sib.popularlibraries.mvp.model.repo.IGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.IGitRepoForks
 import com.nick_sib.popularlibraries.mvp.presenters.list.ForkUsersItemView
 import com.nick_sib.popularlibraries.mvp.presenters.list.IForkUsersListPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
@@ -10,7 +10,7 @@ import moxy.MvpPresenter
 
 class ForksPresenter(
     private val mainThreadScheduler: Scheduler,
-    private val forksRepo: IGithubUsersRepo,
+    private val forks: IGitRepoForks,
     private val forkUsersURL: String,
 ): MvpPresenter<LoadedView>() {
     class ForkUsersListPresenter : IForkUsersListPresenter {
@@ -41,7 +41,7 @@ class ForksPresenter(
     }
 
     private fun loadData() {
-        forksRepo.getForksRepos(forkUsersURL)
+        forks.getForksRepos(forkUsersURL)
             .observeOn(mainThreadScheduler)
             .subscribe({ repos ->
                 forkUsersListPresenter.users.clear()

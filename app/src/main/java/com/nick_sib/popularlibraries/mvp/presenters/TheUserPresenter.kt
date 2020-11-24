@@ -4,7 +4,7 @@ package com.nick_sib.popularlibraries.mvp.presenters
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUserRepo
-import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitTheUserRepos
 import com.nick_sib.popularlibraries.mvp.presenters.list.IForkListPresenter
 import com.nick_sib.popularlibraries.mvp.view.ForkItemView
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
@@ -16,7 +16,7 @@ import ru.terrakok.cicerone.Router
 /**Презентер отдельного пользователя по которому кликнули*/
 class TheUserPresenter (
     private val mainThreadScheduler: Scheduler,
-    private val usersRepo: RetrofitGithubUsersRepo,
+    private val repos: RetrofitTheUserRepos,
     private val theUserData: GithubUser,
     private val router: Router = App.instance.router
 ) : MvpPresenter<LoadedView>() {
@@ -53,7 +53,7 @@ class TheUserPresenter (
     private fun loadData() {
         theUserData.login?.also {userLogin ->
             viewState.beginLoading()
-            usersRepo.getUserRepos(userLogin)
+            repos.getUserRepos(userLogin)
                 .observeOn(mainThreadScheduler)
                 .subscribe({ repos ->
                     forksListPresenter.forks.clear()

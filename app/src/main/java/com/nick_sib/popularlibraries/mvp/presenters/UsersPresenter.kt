@@ -4,7 +4,7 @@ package com.nick_sib.popularlibraries.mvp.presenters
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
-import com.nick_sib.popularlibraries.mvp.model.repo.IGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.IGithubUsers
 import com.nick_sib.popularlibraries.mvp.view.UserItemView
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.navigation.Screens
@@ -14,7 +14,7 @@ import ru.terrakok.cicerone.Router
 
 class UsersPresenter(
     private val mainThreadScheduler: Scheduler,
-    private val usersRepo: IGithubUsersRepo,
+    private val users: IGithubUsers,
     private val router: Router = App.instance.router
 ) : MvpPresenter<LoadedView>() {
 
@@ -48,7 +48,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        usersRepo.getUsers()
+        users.getUsers()
             .observeOn(mainThreadScheduler)
             .subscribe({ repos ->
                 usersListPresenter.users.clear()

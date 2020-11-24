@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
-import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsers
 import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
 import com.nick_sib.popularlibraries.mvp.presenters.UsersPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
@@ -17,9 +17,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class LoadedFragment : MvpAppCompatFragment(), LoadedView {
+class UsersFragment : MvpAppCompatFragment(), LoadedView {
     companion object {
-        fun newInstance() = LoadedFragment()
+        fun newInstance() = UsersFragment()
     }
 
     private var binding: FragmentUsersBinding? = null
@@ -28,7 +28,7 @@ class LoadedFragment : MvpAppCompatFragment(), LoadedView {
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api),
+            RetrofitGithubUsers(ApiHolder.api),
             App.instance.router)
     }
 

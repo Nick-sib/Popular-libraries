@@ -51,7 +51,7 @@
         android:layout_height="@dimen/progressbar_size"
         android:indeterminateDrawable="@drawable/spinner_ring"
         android:indeterminateOnly="true"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/rvForks"
         app:layout_constraintBottom_toBottomOf="@id/rvForks"
         app:layout_constraintEnd_toEndOf="@id/rvForks"

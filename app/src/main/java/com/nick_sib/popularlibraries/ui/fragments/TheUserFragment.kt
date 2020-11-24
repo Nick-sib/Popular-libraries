@@ -10,7 +10,7 @@ import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentTheuserBinding
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
-import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitTheUserRepos
 import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.ui.adapter.ForksRVAdapter
@@ -37,7 +37,7 @@ class TheUserFragment : MvpAppCompatFragment(), LoadedView {
     private val presenter: TheUserPresenter by moxyPresenter {
         TheUserPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubUsersRepo(ApiHolder.api),
+            RetrofitTheUserRepos(ApiHolder.api),
             theUserData,
             App.instance.router)
     }
