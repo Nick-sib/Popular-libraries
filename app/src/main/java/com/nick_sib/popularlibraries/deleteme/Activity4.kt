@@ -29,10 +29,17 @@ class Activity4 : MvpAppCompatActivity(), Activity4View {
     private var alertDialog: AlertDialog? = null
 
     private fun checkPermission() =
-        ContextCompat.checkSelfPermission(this, REQUESTED_PERMISSION) == PackageManager.PERMISSION_GRANTED
+        ContextCompat.checkSelfPermission(
+            this,
+            REQUESTED_PERMISSION
+        ) == PackageManager.PERMISSION_GRANTED
 
     private fun requestPermission() {
-        ActivityCompat.requestPermissions(this, arrayOf(REQUESTED_PERMISSION), REQUEST_PERMISSION_CODE)
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(REQUESTED_PERMISSION),
+            REQUEST_PERMISSION_CODE
+        )
     }
 
     private val presenter: PresenterLesson4 by moxyPresenter {
@@ -57,18 +64,27 @@ class Activity4 : MvpAppCompatActivity(), Activity4View {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == REQUEST_PERMISSION_CODE) {
-            binding.bOpenImage.isEnabled = (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            binding.bOpenImage.isEnabled =
+                (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
             if (!binding.bOpenImage.isEnabled) {
-                Toast.makeText(this, "Пространное рассуждение что разрешение важно для работы", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Пространное рассуждение что разрешение важно для работы",
+                    Toast.LENGTH_LONG
+                ).show()
                 return
             }
         }
     }
 
 
-    private fun openImageDialog(){
+    private fun openImageDialog() {
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
             type = "image/*"
         }
@@ -81,8 +97,8 @@ class Activity4 : MvpAppCompatActivity(), Activity4View {
         if (requestCode != REQUEST_CODE || resultCode != RESULT_OK) return
 
         resultData?.run {
-            data?.also {imagePath ->
-                getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.also {imagesRoot ->
+            data?.also { imagePath ->
+                getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.also { imagesRoot ->
                     presenter.convertImage(imagePath.toString(), imagesRoot.toString())
                 }
 

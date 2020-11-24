@@ -9,6 +9,5 @@
     <string name="original_image">Original image</string>
     <string name="compressed_duplicate">Compressed duplicate</string>
     <string name="github_user_avatar">Github user avatar</string>
-    <string name="default_description">Default Description</string>
     <string name="iv_description">Github user avatar</string>
 </resources>

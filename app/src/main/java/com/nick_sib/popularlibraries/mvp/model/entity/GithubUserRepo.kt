@@ -7,5 +7,5 @@ import java.net.URL
 data class GithubUserRepo (
     @Expose val id: Int = 0,
     @Expose val name: String? = null,
-    @Url val forks_url: URL? = null
+    @Expose val forks_url: String? = null
 )

@@ -5,54 +5,57 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
+import com.nick_sib.popularlibraries.databinding.FragmentForkBinding
 import com.nick_sib.popularlibraries.databinding.FragmentTheuserBinding
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
+import com.nick_sib.popularlibraries.mvp.presenters.ForksPresenter
 import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
+import com.nick_sib.popularlibraries.ui.adapter.ForkUsersRVAdapter
 import com.nick_sib.popularlibraries.ui.adapter.ForksRVAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import java.net.URL
 
-class TheUserFragment : MvpAppCompatFragment(), LoadedView {
+class ForkFragment : MvpAppCompatFragment() , LoadedView  {
 
     companion object {
-        private const val USER_DATA = "user_data"
+        private const val FORK_DATA = "fork_data"
 
-        fun newInstance(userData: GithubUser) = TheUserFragment().apply{
+        fun newInstance(forkData: String) = ForkFragment().apply{
             arguments = Bundle().apply {
-                putParcelable(USER_DATA, userData)
+                putString(FORK_DATA, forkData)
             }
         }
     }
 
-    private var binding: FragmentTheuserBinding? = null
+    private var binding: FragmentForkBinding? = null
 
-    private lateinit var theUserData: GithubUser
+    private lateinit var forkData: String
 
-    private val presenter: TheUserPresenter by moxyPresenter {
-        TheUserPresenter(
+    private val presenter: ForksPresenter by moxyPresenter {
+        ForksPresenter(
             AndroidSchedulers.mainThread(),
             RetrofitGithubUsersRepo(ApiHolder.api),
-            theUserData,
-            App.instance.router)
+            forkData)
     }
 
 
-    private val adapter: ForksRVAdapter by lazy {
-        ForksRVAdapter(presenter.forksListPresenter)
+    private val adapter: ForkUsersRVAdapter by lazy {
+        ForkUsersRVAdapter(presenter.forkUsersListPresenter)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View  = FragmentTheuserBinding.inflate(inflater, container, false).let {
+    ): View = FragmentForkBinding.inflate(inflater, container, false).let {
         binding = it
         it.root
     }
@@ -63,23 +66,19 @@ class TheUserFragment : MvpAppCompatFragment(), LoadedView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        theUserData = arguments?.getParcelable(USER_DATA)
-            ?: GithubUser(null, null, null)
+        forkData = arguments?.getString(FORK_DATA)
+            ?: ""
         super.onCreate(savedInstanceState)
     }
 
+
     override fun init() {
         binding?.apply {
-            bitvLogin.text =  theUserData.login
-            tvId.text =  theUserData.id
-            Glide.with(this@TheUserFragment)
-                .asBitmap()
-                .load(theUserData.avatarUrl)
-                .into(ivAvatar)
-            rvForks.adapter = adapter
+            tvForkURL.text =  forkData
+            rvForkData.adapter = adapter
         }
     }
-    
+
     override fun beginLoading() {
         binding?.apply {
             progressBar.visibility = View.VISIBLE
@@ -99,6 +98,5 @@ class TheUserFragment : MvpAppCompatFragment(), LoadedView {
     override fun showError(errorText: String) {
         Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
     }
-
 
 }

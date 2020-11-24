@@ -1,9 +1,11 @@
 package com.nick_sib.popularlibraries.deleteme
 
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.observables.ConnectableObservable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
 
@@ -24,21 +26,20 @@ class PresenterLesson4(private val model: ModelLesson4): MvpPresenter<Activity4V
                     disposable = d
                     viewState.beginConvert(imagePath)
                 }
-            override fun onNext(progress: Int?) {
+                override fun onNext(progress: Int?) {
                     progress?.run {
                         viewState.progressConvert(progress)
                     }
                 }
-            override fun onError(e: Throwable?) {
+                override fun onError(e: Throwable?) {
                     viewState.showError(e.toString())
                 }
-            override fun onComplete() {
+                override fun onComplete() {
                     model.convertedImage?.run {
                         viewState.endConvert(this)
                     } ?: viewState.showError("Ошибка созданного имени файла")
                 }
-            }
-            )
+            })
             hotObservable.connect()
     }
 

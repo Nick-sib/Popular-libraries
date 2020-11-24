@@ -11,15 +11,15 @@ import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
 import com.nick_sib.popularlibraries.mvp.presenters.UsersPresenter
-import com.nick_sib.popularlibraries.mvp.view.UsersView
+import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.ui.adapter.UsersRVAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UsersFragment : MvpAppCompatFragment(), UsersView {
+class LoadedFragment : MvpAppCompatFragment(), LoadedView {
     companion object {
-        fun newInstance() = UsersFragment()
+        fun newInstance() = LoadedFragment()
     }
 
     private var binding: FragmentUsersBinding? = null

@@ -6,7 +6,7 @@ import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.model.repo.IGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.view.UserItemView
-import com.nick_sib.popularlibraries.mvp.view.UsersView
+import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
@@ -16,7 +16,7 @@ class UsersPresenter(
     private val mainThreadScheduler: Scheduler,
     private val usersRepo: IGithubUsersRepo,
     private val router: Router = App.instance.router
-) : MvpPresenter<UsersView>() {
+) : MvpPresenter<LoadedView>() {
 
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
@@ -59,8 +59,4 @@ class UsersPresenter(
             })
     }
 
-    fun backPressed(): Boolean {
-        router.exit()
-        return true
-    }
 }

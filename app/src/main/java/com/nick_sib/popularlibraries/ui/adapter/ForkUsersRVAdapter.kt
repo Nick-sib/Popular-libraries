@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.ItemSimpleTextBinding
-import com.nick_sib.popularlibraries.mvp.presenters.list.IForkListPresenter
-import com.nick_sib.popularlibraries.mvp.view.ForkItemView
+import com.nick_sib.popularlibraries.mvp.presenters.list.ForkUsersItemView
+import com.nick_sib.popularlibraries.mvp.presenters.list.IForkUsersListPresenter
 import kotlinx.android.extensions.LayoutContainer
 
-class ForksRVAdapter(
-    private val presenter: IForkListPresenter
-) : RecyclerView.Adapter<ForksRVAdapter.ViewHolder>() {
+
+class ForkUsersRVAdapter(
+    private val presenter: IForkUsersListPresenter
+) : RecyclerView.Adapter<ForkUsersRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
@@ -26,19 +27,19 @@ class ForksRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.pos = position
         holder.containerView.setOnClickListener {
-            presenter.itemClickListener?.invoke(holder)
+            //presenter.itemClickListener?.invoke(holder)
         }
         presenter.bindView(holder)
     }
 
     inner class ViewHolder(
         override val containerView: View
-    ) : RecyclerView.ViewHolder(containerView), LayoutContainer, ForkItemView {
+    ) : RecyclerView.ViewHolder(containerView), LayoutContainer, ForkUsersItemView {
         private var binding: ItemSimpleTextBinding = ItemSimpleTextBinding.bind(containerView)
 
         override var pos = -1
 
-        override fun setForkName(text: String) {
+        override fun setForkUserName(text: String) {
             binding.tvName.text = text
         }
     }

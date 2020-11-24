@@ -1,20 +1,25 @@
 package com.nick_sib.popularlibraries.mvp.presenters
 
+
+import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUserRepo
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsersRepo
 import com.nick_sib.popularlibraries.mvp.presenters.list.IForkListPresenter
 import com.nick_sib.popularlibraries.mvp.view.ForkItemView
-import com.nick_sib.popularlibraries.mvp.view.TheUserView
+import com.nick_sib.popularlibraries.mvp.view.LoadedView
+import com.nick_sib.popularlibraries.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
+import ru.terrakok.cicerone.Router
 
 /**Презентер отдельного пользователя по которому кликнули*/
 class TheUserPresenter (
     private val mainThreadScheduler: Scheduler,
     private val usersRepo: RetrofitGithubUsersRepo,
-    private val theUserData: GithubUser
-) : MvpPresenter<TheUserView>() {
+    private val theUserData: GithubUser,
+    private val router: Router = App.instance.router
+) : MvpPresenter<LoadedView>() {
 
     class ForkListPresenter : IForkListPresenter {
         val forks = mutableListOf<GithubUserRepo>()
@@ -37,7 +42,12 @@ class TheUserPresenter (
         viewState.init()
         loadData()
 
-        //fork click
+        forksListPresenter.itemClickListener = { itemView ->
+            val fork = forksListPresenter.forks[itemView.pos]
+            fork.forks_url?.run {
+                router.navigateTo(Screens.ForksScreen(this))
+            }
+        }
     }
 
     private fun loadData() {
