@@ -1,5 +1,6 @@
 package com.nick_sib.popularlibraries.navigation
 
+import com.nick_sib.popularlibraries.mvp.model.entity.GithubRepository
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.ui.fragments.ForkFragment
 import com.nick_sib.popularlibraries.ui.fragments.UsersFragment
@@ -15,8 +16,8 @@ class Screens {
         override fun getFragment() = TheUserFragment.newInstance(userData)
     }
 
-    class ForksScreen(private var forkURL: String) : SupportAppScreen() {
-        override fun getFragment() = ForkFragment.newInstance(forkURL)
+    class ForksScreen(private var repoData: GithubRepository) : SupportAppScreen() {
+        override fun getFragment() = ForkFragment.newInstance(repoData)
     }
 
 }

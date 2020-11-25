@@ -1,48 +1,32 @@
 package com.nick_sib.popularlibraries.ui.fragments
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.nick_sib.popularlibraries.ApiHolder
+import androidx.fragment.app.Fragment
+import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.FragmentForkBinding
-import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsers
-import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitRepoForks
-import com.nick_sib.popularlibraries.mvp.presenters.ForksPresenter
-import com.nick_sib.popularlibraries.mvp.view.LoadedView
-import com.nick_sib.popularlibraries.ui.adapter.ForkUsersRVAdapter
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import moxy.MvpAppCompatFragment
-import moxy.ktx.moxyPresenter
+import com.nick_sib.popularlibraries.mvp.model.entity.GithubRepository
 
-class ForkFragment : MvpAppCompatFragment() , LoadedView  {
+
+class ForkFragment : Fragment() {
 
     companion object {
-        private const val FORK_DATA = "fork_data"
+        private const val REPO_DATA = "fork_data"
 
-        fun newInstance(forkData: String) = ForkFragment().apply{
+        fun newInstance(repoData: GithubRepository) = ForkFragment().apply{
             arguments = Bundle().apply {
-                putString(FORK_DATA, forkData)
+                putParcelable(REPO_DATA, repoData)
             }
         }
     }
 
     private var binding: FragmentForkBinding? = null
 
-    private lateinit var forkData: String
+    private lateinit var repoData: GithubRepository
 
-    private val presenter: ForksPresenter by moxyPresenter {
-        ForksPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitRepoForks(ApiHolder.api),
-            forkData)
-    }
-
-
-    private val adapter: ForkUsersRVAdapter by lazy {
-        ForkUsersRVAdapter(presenter.forkUsersListPresenter)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,37 +43,19 @@ class ForkFragment : MvpAppCompatFragment() , LoadedView  {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        forkData = arguments?.getString(FORK_DATA)
-            ?: ""
+        repoData = arguments?.getParcelable(REPO_DATA)
+            ?: GithubRepository(0, "empty", 0)
         super.onCreate(savedInstanceState)
+
     }
 
-
-    override fun init() {
+    override fun onResume() {
+        super.onResume()
         binding?.apply {
-            tvForkURL.text =  forkData
-            rvForkData.adapter = adapter
+            tvForkId.text = resources.getString(R.string.fork_id, repoData.id)
+            tvForkTitle.text = resources.getString(R.string.fork_name, repoData.name)
+            tvForkCount.text = resources.getString(R.string.fork_count, repoData.forksCount)
         }
-    }
-
-    override fun beginLoading() {
-        binding?.apply {
-            progressBar.visibility = View.VISIBLE
-        }
-    }
-
-    override fun updateList() {
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun endLoading() {
-        binding?.apply {
-            progressBar.visibility = View.GONE
-        }
-    }
-
-    override fun showError(errorText: String) {
-        Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
     }
 
 }

@@ -9,7 +9,7 @@ import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.ItemUserBinding
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.view.image.IImageLoader
-import com.nick_sib.popularlibraries.mvp.view.UserItemView
+import com.nick_sib.popularlibraries.mvp.view.list.UserItemView
 import kotlinx.android.extensions.LayoutContainer
 
 class UsersRVAdapter(

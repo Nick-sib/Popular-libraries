@@ -1,4 +1,4 @@
-package com.nick_sib.popularlibraries.mvp.view
+package com.nick_sib.popularlibraries.mvp.view.list
 
 
 interface UserItemView: IItemView {

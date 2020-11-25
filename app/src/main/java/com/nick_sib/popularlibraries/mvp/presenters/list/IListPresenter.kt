@@ -1,6 +1,6 @@
 package com.nick_sib.popularlibraries.mvp.presenters.list
 
-import com.nick_sib.popularlibraries.mvp.view.IItemView
+import com.nick_sib.popularlibraries.mvp.view.list.IItemView
 
 interface IListPresenter<V : IItemView> {
     var itemClickListener: ((V) -> Unit)?
