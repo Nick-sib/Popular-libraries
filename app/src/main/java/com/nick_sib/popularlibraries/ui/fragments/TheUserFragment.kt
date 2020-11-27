@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentTheuserBinding
+import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomGithubReposCache
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.model.entity.room.Database
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitTheUserRepos
@@ -42,7 +43,8 @@ class TheUserFragment : MvpAppCompatFragment(), LoadedView {
             RetrofitTheUserRepos(
                 ApiHolder.api,
                 AndroidNetworkStatus(App.instance.baseContext),
-                Database.instance!!),
+                RoomGithubReposCache(Database.instance!!)
+            ),
             theUserData,
             App.instance.router)
     }

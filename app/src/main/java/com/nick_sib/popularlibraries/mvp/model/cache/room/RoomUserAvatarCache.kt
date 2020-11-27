@@ -2,7 +2,6 @@ package com.nick_sib.popularlibraries.mvp.model.cache.room
 
 import android.graphics.Bitmap
 import android.os.Environment
-import android.util.Log
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.cache.IUserAvatarCache
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser

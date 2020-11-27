@@ -2,8 +2,6 @@ package com.nick_sib.popularlibraries.mvp.model.entity.room
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.entity.room.dao.RepositoryDao
 import com.nick_sib.popularlibraries.mvp.model.entity.room.dao.UserDao
