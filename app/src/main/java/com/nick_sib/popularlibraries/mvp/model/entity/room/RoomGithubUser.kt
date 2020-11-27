@@ -8,5 +8,6 @@ class RoomGithubUser(
     @PrimaryKey var id: Long,
     var login: String,
     var avatarUrl: String,
-    var reposUrl: String//В моей версии Api это поле не используется
+    //var reposUrl: String//Поле для локального кеша картинки
+    var avatarPath: String//Поле для локального кеша картинки
 )

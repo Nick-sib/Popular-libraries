@@ -5,5 +5,6 @@ import io.reactivex.rxjava3.core.Single
 
 
 interface IGithubUsersCache {
+    fun setUsers(users: List<GithubUser>): Single<List<GithubUser>>
     fun getUsers(): Single<List<GithubUser>>
 }

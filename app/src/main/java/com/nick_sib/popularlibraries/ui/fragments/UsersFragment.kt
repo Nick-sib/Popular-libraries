@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
+import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomGithubUsersCache
+import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomUserAvatarCache
 import com.nick_sib.popularlibraries.mvp.model.entity.room.Database
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsers
 import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
@@ -33,12 +35,13 @@ class UsersFragment : MvpAppCompatFragment(), LoadedView {
             RetrofitGithubUsers(
                 ApiHolder.api,
                 AndroidNetworkStatus(App.instance.baseContext),
-                Database.instance!!),
+                RoomGithubUsersCache(Database.instance!!)
+                ),
             App.instance.router)
     }
 
     private val adapter: UsersRVAdapter by lazy {
-        UsersRVAdapter(presenter.usersListPresenter,  GlideImageLoader())
+        UsersRVAdapter(presenter.usersListPresenter,  GlideImageLoader(RoomUserAvatarCache(Database.instance!!)))
     }
 
     override fun onCreateView(

@@ -43,8 +43,8 @@ class UsersRVAdapter(
         override fun setLogin(text: String) {
             binding.tvLogin.text = text
         }
-        override fun loadAvatar(url: String)  {
-            imageLoader.loadInto(url, binding.ivAvatar)
+        override fun loadAvatar(url: String, userLogin: String)  {
+            imageLoader.loadInto(url, binding.ivAvatar, userLogin)
         }
     }
 }
