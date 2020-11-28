@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.nick_sib.popularlibraries.mvp.model.cache.IUserAvatarCache
 
-class GlideImageLoader(private val cache: IUserAvatarCache) : IImageLoader<ImageView> {
+class GlideImageLoader(/*private val cache: IUserAvatarCache*/) : IImageLoader<ImageView> {
     override fun loadInto(url: String, container: ImageView, userLogin: String) {
         Glide.with(container.context)
             .asBitmap()
@@ -34,7 +34,7 @@ class GlideImageLoader(private val cache: IUserAvatarCache) : IImageLoader<Image
                     isFirstResource: Boolean
                 ): Boolean {
                     //Кешируем
-                    if (isFirstResource) cache.setAvatar(userLogin, bitmap)
+                    //if (isFirstResource) cache.setAvatar(userLogin, bitmap)
                     return false
                 }
             })

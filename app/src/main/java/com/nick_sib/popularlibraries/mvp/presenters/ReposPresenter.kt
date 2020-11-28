@@ -12,14 +12,16 @@ import com.nick_sib.popularlibraries.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 /**Презентер отдельного пользователя по которому кликнули*/
 class ReposPresenter (
     private val scheduler: Scheduler,
     private val repos: RetrofitTheUserRepos,
     private val userData: GithubUser,
-    private val router: Router = App.instance.router
+    private val router: Router
 ) : MvpPresenter<LoadedView>() {
+
 
     inner class RepoListPresenter : IRepoListPresenter {
         var repos = listOf<GithubRepository>()

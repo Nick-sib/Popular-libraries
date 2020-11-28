@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
+import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
 import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomGithubUsersCache
 import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomUserAvatarCache
@@ -20,28 +21,31 @@ import com.nick_sib.popularlibraries.ui.network.AndroidNetworkStatus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 class UsersFragment : MvpAppCompatFragment(), LoadedView {
+
+    //При выполнении практического задания это должно отсюда уйти
+    @Inject
+    lateinit var database: Database
+
     companion object {
         fun newInstance() = UsersFragment()
+            .apply {
+                App.instance.appComponent.inject(this)
+        }
     }
 
     private var binding: FragmentUsersBinding? = null
 
-
-    private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(
-            AndroidSchedulers.mainThread(),
-            RetrofitGithubUsers(
-                ApiHolder.api,
-                AndroidNetworkStatus(App.instance.baseContext),
-                RoomGithubUsersCache(Database.instance!!)
-                ),
-            App.instance.router)
+    val presenter: UsersPresenter by moxyPresenter {
+        UsersPresenter(AndroidSchedulers.mainThread()).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
-    private val adapter: UsersRVAdapter by lazy {
-        UsersRVAdapter(presenter.usersListPresenter,  GlideImageLoader(RoomUserAvatarCache(Database.instance!!)))
+    val adapter: UsersRVAdapter by lazy {
+        UsersRVAdapter(presenter.usersListPresenter, GlideImageLoader())
     }
 
     override fun onCreateView(
@@ -86,5 +90,73 @@ class UsersFragment : MvpAppCompatFragment(), LoadedView {
             progressBar.visibility = View.GONE
         }
     }
+
 }
+
+//class UsersFragment : MvpAppCompatFragment(), LoadedView {
+//    companion object {
+//        fun newInstance() = UsersFragment()
+//    }
+//
+//    private var binding: FragmentUsersBinding? = null
+//
+//
+//    private val presenter: UsersPresenter by moxyPresenter {
+//        UsersPresenter(
+//            AndroidSchedulers.mainThread(),
+//            RetrofitGithubUsers(
+//                ApiHolder.api,
+//                AndroidNetworkStatus(App.instance.baseContext),
+//                RoomGithubUsersCache(Database.instance!!)
+//                ),
+//            App.instance.router)
+//    }
+//
+//    private val adapter: UsersRVAdapter by lazy {
+//        UsersRVAdapter(presenter.usersListPresenter,  GlideImageLoader(RoomUserAvatarCache(Database.instance!!)))
+//    }
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View  = FragmentUsersBinding.inflate(inflater, container, false).let {
+//        binding = it
+//        it.root
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        binding = null
+//    }
+//
+//    override fun init() {
+//        binding?.apply {
+//            rvUsers.adapter = adapter
+//        }
+//    }
+//
+//    override fun updateList() {
+//        adapter.notifyDataSetChanged()
+//    }
+//
+//    override fun beginLoading(){
+//        binding?.apply {
+//            progressBar.visibility = View.VISIBLE
+//        }
+//    }
+//
+//    override fun endLoading(){
+//        binding?.apply {
+//            progressBar.visibility = View.GONE
+//        }
+//    }
+//
+//    override fun showError(errorText: String) {
+//        Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
+//        binding?.apply {
+//            progressBar.visibility = View.GONE
+//        }
+//    }
+//}
 
