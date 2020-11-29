@@ -6,7 +6,7 @@ buildscript {
         rx_version = "3.0.0"
         retrofit_version = "2.9.0"
         room_version = "2.2.5"
-        dagger_version = "2.24"
+        dagger_version = "2.30.1"
     }
     repositories {
         google()

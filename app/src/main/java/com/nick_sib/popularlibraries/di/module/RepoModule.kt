@@ -23,4 +23,13 @@ class RepoModule {
         cache: IGithubUsersCache
     ): IGithubUsers = RetrofitGithubUsers(api, networkStatus, cache)
 
+    @Singleton
+    @Provides
+    fun userRepositoriesRepo(
+        api: IDataSource,
+        networkStatus: INetworkStatus,
+        cache: IGithubReposCache
+    ): IGitUserRepos = RetrofitTheUserRepos(api, networkStatus, cache)
+
+
 }

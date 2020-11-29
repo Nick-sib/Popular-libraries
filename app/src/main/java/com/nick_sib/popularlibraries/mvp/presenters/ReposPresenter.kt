@@ -2,12 +2,12 @@ package com.nick_sib.popularlibraries.mvp.presenters
 
 
 import com.nick_sib.popularlibraries.App
-import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubRepository
-import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitTheUserRepos
+import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
+import com.nick_sib.popularlibraries.mvp.model.repo.IGitUserRepos
 import com.nick_sib.popularlibraries.mvp.presenters.list.IRepoListPresenter
-import com.nick_sib.popularlibraries.mvp.view.list.RepoItemView
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
+import com.nick_sib.popularlibraries.mvp.view.list.RepoItemView
 import com.nick_sib.popularlibraries.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
@@ -15,13 +15,22 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 /**Презентер отдельного пользователя по которому кликнули*/
-class ReposPresenter (
-    private val scheduler: Scheduler,
-    private val repos: RetrofitTheUserRepos,
-    private val userData: GithubUser,
-    private val router: Router
+class ReposPresenter(
+    private val userData: GithubUser
 ) : MvpPresenter<LoadedView>() {
 
+    init {
+        App.instance.appComponent.inject(this)
+    }
+
+    @Inject
+    lateinit var repos: IGitUserRepos
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var scheduler: Scheduler
 
     inner class RepoListPresenter : IRepoListPresenter {
         var repos = listOf<GithubRepository>()
