@@ -10,7 +10,6 @@ import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
 import com.nick_sib.popularlibraries.mvp.presenters.UsersPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.ui.adapter.UsersRVAdapter
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -23,7 +22,7 @@ class UsersFragment : MvpAppCompatFragment(), LoadedView {
     private var binding: FragmentUsersBinding? = null
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(AndroidSchedulers.mainThread())
+        UsersPresenter()
     }
 
     private val adapter: UsersRVAdapter by lazy {

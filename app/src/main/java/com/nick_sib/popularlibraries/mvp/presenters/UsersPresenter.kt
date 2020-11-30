@@ -13,10 +13,11 @@ import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
-class UsersPresenter(private val mainThreadScheduler: Scheduler) : MvpPresenter<LoadedView>() {
+class UsersPresenter : MvpPresenter<LoadedView>() {
 
     @Inject lateinit var usersRepo: IGithubUsers
     @Inject lateinit var router: Router
+    @Inject lateinit var mainThreadScheduler: Scheduler
 
     init {
         App.instance.appComponent.inject(this)
