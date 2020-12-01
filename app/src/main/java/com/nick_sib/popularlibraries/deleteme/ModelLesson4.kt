@@ -20,39 +20,28 @@ object ModelLesson4 {
         private set
 
 
+    fun convert(imagePathIn: String, imagesRoot: String): ConnectableObservable<Int> =
+        Observable.create<Int> { emitter ->
+            val imagePath: Uri = imagePathIn.toUri()
 
-    fun convert(imagePath: Uri, imagesRoot: String): ConnectableObservable<Int> =
-
-
-        Observable.create<Int>{ emitter ->
             for (i in 1 until MAX_STEPS) {
                 Thread.sleep(1000)
                 emitter.onNext(i)
-             }
+            }
 
-             //Непосредственно конвертация
+            //Непосредственно конвертация
             val myImagesDir = File(imagesRoot + IMAGE_FOLDER)
-             if (!myImagesDir.exists()) myImagesDir.mkdirs()
-             val result = String.format("%s%s/%s.png", imagesRoot, IMAGE_FOLDER, imagePath.getName())
-             val out = FileOutputStream(File(result))
-             imagePath
-                 .getCapturedImage()?.compress(Bitmap.CompressFormat.PNG, 100, out)
-                 ?: emitter.onError(Throwable("Image ERROR"))
-             emitter.onNext(MAX_STEPS)
-             convertedImage = result.toUri()
-             out.flush()
-             out.close()
-             emitter.onComplete()
-         }
+            if (!myImagesDir.exists()) myImagesDir.mkdirs()
+            val result = String.format("%s%s/%s.png", imagesRoot, IMAGE_FOLDER, imagePath.getName())
+            val out = FileOutputStream(File(result))
+            imagePath.getCapturedImage()?.compress(Bitmap.CompressFormat.PNG, 100, out) ?: emitter.onError(Throwable("Image ERROR"))
+            emitter.onNext(MAX_STEPS)
+            convertedImage = result.toUri()
+            out.flush()
+            out.close()
+            emitter.onComplete()
+        }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .publish()
-
-
-
-
-
-
-
-
 }

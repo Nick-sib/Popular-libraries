@@ -1,9 +1,14 @@
 package com.nick_sib.popularlibraries.mvp.model.entity
 
+
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.Expose
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class GithubUser(
-    val login: String
+    @Expose val id: String? = null,
+    @Expose val login: String? = null,
+    @Expose val avatarUrl: String? = null
 ) : Parcelable

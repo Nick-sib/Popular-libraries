@@ -3,23 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:foreground="?attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:layout_marginTop="@dimen/global_list_offset"
+    android:padding="10dp"
     tools:ignore="UseCompoundDrawables">
 
-    <ImageView
-        android:id="@+id/ivAvatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        tools:src="@drawable/ic_launcher_background"
-        android:contentDescription="@string/github_user_avatar"/>
-
     <TextView
-        android:id="@+id/tvLogin"
+        android:id="@+id/tvName"
         tools:text="TEXT TEXT TEXT"
         style="@style/DefaultTextViewStyle"
         android:layout_marginStart="@dimen/global_layout_offset"/>
