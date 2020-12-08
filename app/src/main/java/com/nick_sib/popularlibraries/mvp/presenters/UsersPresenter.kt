@@ -1,7 +1,6 @@
 package com.nick_sib.popularlibraries.mvp.presenters
 
 
-import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.model.repo.IGithubUsers
@@ -18,10 +17,6 @@ class UsersPresenter : MvpPresenter<LoadedView>() {
     @Inject lateinit var usersRepo: IGithubUsers
     @Inject lateinit var router: Router
     @Inject lateinit var mainThreadScheduler: Scheduler
-
-    init {
-        App.instance.appComponent.inject(this)
-    }
 
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
@@ -58,6 +53,11 @@ class UsersPresenter : MvpPresenter<LoadedView>() {
             }, {
                 println("Error: ${it.message}")
             })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.release()
     }
 
 }

@@ -5,6 +5,8 @@ import android.app.Application
 import com.nick_sib.popularlibraries.di.AppComponent
 import com.nick_sib.popularlibraries.di.DaggerAppComponent
 import com.nick_sib.popularlibraries.di.module.AppModule
+import com.nick_sib.popularlibraries.di.repository.RepositorySubComponent
+import com.nick_sib.popularlibraries.di.users.UsersSubComponent
 
 class App : Application() {
     companion object {
@@ -12,6 +14,11 @@ class App : Application() {
     }
 
     lateinit var appComponent: AppComponent
+        private set
+
+    private var usersSubComponent: UsersSubComponent? = null
+
+    private var repositorySubComponent: RepositorySubComponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -20,5 +27,21 @@ class App : Application() {
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .build()
+    }
+
+    fun initUserSubComponent() = appComponent.usersSubComponent().also {
+        usersSubComponent = it
+    }
+
+    fun releaseUserSubComponent() {
+        usersSubComponent = null
+    }
+
+    fun initRepositorySubComponent() = usersSubComponent?.repositorySubComponent().also {
+        repositorySubComponent = it
+    }
+
+    fun releaseRepositorySubComponent() {
+        repositorySubComponent = null
     }
 }

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
+import com.nick_sib.popularlibraries.di.users.UsersSubComponent
 import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
 import com.nick_sib.popularlibraries.mvp.presenters.UsersPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
@@ -21,8 +23,13 @@ class UsersFragment : MvpAppCompatFragment(), LoadedView {
 
     private var binding: FragmentUsersBinding? = null
 
+    private var usersSubComponent: UsersSubComponent? = null
+
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter()
+        usersSubComponent = App.instance.initUserSubComponent()
+        UsersPresenter().apply {
+            usersSubComponent?.inject(this)
+        }
     }
 
     private val adapter: UsersRVAdapter by lazy {
@@ -70,6 +77,11 @@ class UsersFragment : MvpAppCompatFragment(), LoadedView {
         binding?.apply {
             progressBar.visibility = View.GONE
         }
+    }
+
+    override fun release() {
+        usersSubComponent = null
+        App.instance.releaseUserSubComponent()
     }
 }
 

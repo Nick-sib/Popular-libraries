@@ -11,4 +11,5 @@ interface LoadedView : MvpView {
     fun beginLoading()
     fun endLoading()
     fun showError(errorText: String)
+    fun release()
 }
