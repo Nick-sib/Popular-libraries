@@ -15,7 +15,7 @@ abstract class Database : RoomDatabase() {
     abstract val repositoryDao: RepositoryDao
 
     companion object {
-        private const val DB_NAME = "database.db"
+        const val DB_NAME = "database.db"
         var instance: Database? = null
             get() = field ?: synchronized(Database::class.java) {
                 field = Room.databaseBuilder(App.instance, Database::class.java, DB_NAME)

@@ -17,7 +17,7 @@ class RetrofitGithubUsers(
         if (isOnline) {
             api.getUsers()
                 .flatMap {
-                    cache.setUsers(it)
+                    cache.putUsers(it).toSingleDefault(it)
                 }
         } else {
             cache.getUsers()

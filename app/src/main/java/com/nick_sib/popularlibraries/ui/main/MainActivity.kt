@@ -3,30 +3,33 @@ package com.nick_sib.popularlibraries.ui.main
 import android.os.Bundle
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
-import com.nick_sib.popularlibraries.databinding.ActivityMainBinding
 import com.nick_sib.popularlibraries.ui.BackButtonListener
 import com.nick_sib.popularlibraries.mvp.presenters.MainPresenter
 import com.nick_sib.popularlibraries.mvp.view.MainView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
+import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import javax.inject.Inject
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-    private lateinit var binding: ActivityMainBinding
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
 
-    private val navigatorHolder = App.instance.navigatorHolder
     private val navigator = SupportAppNavigator(this, supportFragmentManager, R.id.container)
 
     private val presenter: MainPresenter by moxyPresenter {
-        MainPresenter(App.instance.router)
+        MainPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+        App.instance.appComponent.inject(this)
     }
 
     override fun onResumeFragments() {

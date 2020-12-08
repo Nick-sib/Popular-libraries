@@ -11,21 +11,21 @@ import com.nick_sib.popularlibraries.navigation.Screens
 import io.reactivex.rxjava3.core.Scheduler
 import moxy.MvpPresenter
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class UsersPresenter(
-    private val scheduler: Scheduler,
-    private val users: IGithubUsers,
-    private val router: Router = App.instance.router
-) : MvpPresenter<LoadedView>() {
+class UsersPresenter : MvpPresenter<LoadedView>() {
 
-    inner class UsersListPresenter : IUserListPresenter {
-        var users = listOf<GithubUser>()
-        internal set
+    @Inject lateinit var usersRepo: IGithubUsers
+    @Inject lateinit var router: Router
+    @Inject lateinit var mainThreadScheduler: Scheduler
 
-        override var itemClickListener: ((UserItemView) -> Unit)? = { itemView ->
-            val user = users[itemView.pos]
-            router.navigateTo(Screens.TheUserScreen(user))
-        }
+    init {
+        App.instance.appComponent.inject(this)
+    }
+
+    class UsersListPresenter : IUserListPresenter {
+        val users = mutableListOf<GithubUser>()
+        override var itemClickListener: ((UserItemView) -> Unit)? = null
         override fun getCount() = users.size
 
         override fun bindView(view: UserItemView) {
@@ -41,20 +41,21 @@ class UsersPresenter(
         super.onFirstViewAttach()
         viewState.init()
         loadData()
+
+        usersListPresenter.itemClickListener = { itemView ->
+            val user = usersListPresenter.users[itemView.pos]
+            router.navigateTo(Screens.TheUserScreen(user))
+        }
     }
 
     private fun loadData() {
-        users.getUsers()
-            .observeOn(scheduler)
-            .subscribe({ repos ->
-                usersListPresenter.users = repos
+        usersRepo.getUsers()
+            .observeOn(mainThreadScheduler)
+            .subscribe({ users ->
+                usersListPresenter.users.clear()
+                usersListPresenter.users.addAll(users)
                 viewState.updateList()
-                viewState.endLoading()
             }, {
-                it?.message?.run {
-                    viewState.showError(this)
-                }
-                viewState.endLoading()
                 println("Error: ${it.message}")
             })
     }

@@ -9,19 +9,18 @@ import com.nick_sib.popularlibraries.mvp.model.repo.IGitUserRepos
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-//Практическое задание 1 - вытащить кэширование в отдельный класс RoomRepositoriesCache и внедрить его сюда через интерфейс IRepositoriesCache
+
 class RetrofitTheUserRepos(
     private val api: IDataSource,
     private val networkStatus: INetworkStatus,
     private val cache: IGithubReposCache
-    //private val db: Database
 ): IGitUserRepos {
     override fun getUserRepos(user: GithubUser): Single<List<GithubRepository>> =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
                 api.getUserReposByLogin(user.login)
                     .flatMap {
-                        cache.setRepos(it, user)
+                        cache.putRepos(it, user).toSingleDefault(it)
                     }
             } else {
                 cache.getRepos(user)
