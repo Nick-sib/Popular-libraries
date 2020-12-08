@@ -9,7 +9,7 @@ import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.ItemUserBinding
 import com.nick_sib.popularlibraries.mvp.presenters.list.IUserListPresenter
 import com.nick_sib.popularlibraries.mvp.view.image.IImageLoader
-import com.nick_sib.popularlibraries.mvp.view.UserItemView
+import com.nick_sib.popularlibraries.mvp.view.list.UserItemView
 import kotlinx.android.extensions.LayoutContainer
 
 class UsersRVAdapter(
@@ -43,8 +43,8 @@ class UsersRVAdapter(
         override fun setLogin(text: String) {
             binding.tvLogin.text = text
         }
-        override fun loadAvatar(url: String)  {
-            imageLoader.loadInto(url, binding.ivAvatar)
+        override fun loadAvatar(url: String, userLogin: String)  {
+            imageLoader.loadInto(url, binding.ivAvatar, userLogin)
         }
     }
 }

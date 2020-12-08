@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">Popular libraries</string>
-    <string name="title_activity_4">Activity4</string>
-
 
 
     <string name="lesson4">Lesson4</string>
-    <string name="open_image">Open image</string>
-    <string name="original_image">Original image</string>
-    <string name="compressed_duplicate">Compressed duplicate</string>
     <string name="github_user_avatar">Github user avatar</string>
     <string name="iv_description">Github user avatar</string>
+    <string name="fork_id">ID: %d</string>
+    <string name="fork_name">NAME: %s</string>
+    <string name="fork_count">COUNT: %d</string>
+
 </resources>

@@ -9,11 +9,14 @@ import com.bumptech.glide.Glide
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentTheuserBinding
+import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomGithubReposCache
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
+import com.nick_sib.popularlibraries.mvp.model.entity.room.Database
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitTheUserRepos
-import com.nick_sib.popularlibraries.mvp.presenters.TheUserPresenter
+import com.nick_sib.popularlibraries.mvp.presenters.ReposPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.ui.adapter.ForksRVAdapter
+import com.nick_sib.popularlibraries.ui.network.AndroidNetworkStatus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -34,17 +37,21 @@ class TheUserFragment : MvpAppCompatFragment(), LoadedView {
 
     private lateinit var theUserData: GithubUser
 
-    private val presenter: TheUserPresenter by moxyPresenter {
-        TheUserPresenter(
+    private val presenter: ReposPresenter by moxyPresenter {
+        ReposPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitTheUserRepos(ApiHolder.api),
+            RetrofitTheUserRepos(
+                ApiHolder.api,
+                AndroidNetworkStatus(App.instance.baseContext),
+                RoomGithubReposCache(Database.instance!!)
+            ),
             theUserData,
             App.instance.router)
     }
 
 
     private val adapter: ForksRVAdapter by lazy {
-        ForksRVAdapter(presenter.forksListPresenter)
+        ForksRVAdapter(presenter.repoListPresenter)
     }
 
 
@@ -64,14 +71,14 @@ class TheUserFragment : MvpAppCompatFragment(), LoadedView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         theUserData = arguments?.getParcelable(USER_DATA)
-            ?: GithubUser(null, null, null)
+            ?: GithubUser(0, "", "")
         super.onCreate(savedInstanceState)
     }
 
     override fun init() {
         binding?.apply {
             bitvLogin.text =  theUserData.login
-            tvId.text =  theUserData.id
+            tvId.text =  theUserData.id.toString()
             Glide.with(this@TheUserFragment)
                 .asBitmap()
                 .load(theUserData.avatarUrl)

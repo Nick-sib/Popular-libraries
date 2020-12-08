@@ -7,33 +7,35 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/tvForkURL"
-        android:layout_width="match_parent"
+        android:id="@+id/tvForkId"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="TEXT TEXT TEXT"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvForkData"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
         android:layout_margin="@dimen/global_layout_offset"
-        tools:listitem="@layout/item_simple_text"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/tvForkURL"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/tvForkTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="TEXT TEXT TEXT" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="@dimen/progressbar_size"
-        android:layout_height="@dimen/progressbar_size"
-        android:indeterminateDrawable="@drawable/spinner_ring"
-        android:indeterminateOnly="true"
-        android:visibility="gone"
+
+    <TextView
+        android:id="@+id/tvForkTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/global_layout_offset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="TEXT TEXT TEXT" />
+
+    <TextView
+        android:id="@+id/tvForkCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/global_layout_offset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvForkTitle"
+        tools:text="TEXT TEXT TEXT" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

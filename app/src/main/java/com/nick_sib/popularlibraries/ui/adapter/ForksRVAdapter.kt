@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.ItemSimpleTextBinding
-import com.nick_sib.popularlibraries.mvp.presenters.list.IForkListPresenter
-import com.nick_sib.popularlibraries.mvp.view.ForkItemView
+import com.nick_sib.popularlibraries.mvp.presenters.list.IRepoListPresenter
+import com.nick_sib.popularlibraries.mvp.view.list.RepoItemView
 import kotlinx.android.extensions.LayoutContainer
 
 class ForksRVAdapter(
-    private val presenter: IForkListPresenter
+    private val presenter: IRepoListPresenter
 ) : RecyclerView.Adapter<ForksRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -33,12 +33,12 @@ class ForksRVAdapter(
 
     inner class ViewHolder(
         override val containerView: View
-    ) : RecyclerView.ViewHolder(containerView), LayoutContainer, ForkItemView {
+    ) : RecyclerView.ViewHolder(containerView), LayoutContainer, RepoItemView {
         private var binding: ItemSimpleTextBinding = ItemSimpleTextBinding.bind(containerView)
 
         override var pos = -1
 
-        override fun setForkName(text: String) {
+        override fun setRepoName(text: String) {
             binding.tvName.text = text
         }
     }

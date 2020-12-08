@@ -1,11 +1,9 @@
 package com.nick_sib.popularlibraries.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.R
 import com.nick_sib.popularlibraries.databinding.ActivityMainBinding
-import com.nick_sib.popularlibraries.deleteme.Activity4
 import com.nick_sib.popularlibraries.ui.BackButtonListener
 import com.nick_sib.popularlibraries.mvp.presenters.MainPresenter
 import com.nick_sib.popularlibraries.mvp.view.MainView
@@ -29,12 +27,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //TODO: Современем удалить
-        binding.bLesson4.setOnClickListener {
-            startActivity(Intent(this, Activity4::class.java))
-        }
-
     }
 
     override fun onResumeFragments() {

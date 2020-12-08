@@ -8,11 +8,15 @@ import android.widget.Toast
 import com.nick_sib.popularlibraries.ApiHolder
 import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentUsersBinding
+import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomGithubUsersCache
+import com.nick_sib.popularlibraries.mvp.model.cache.room.RoomUserAvatarCache
+import com.nick_sib.popularlibraries.mvp.model.entity.room.Database
 import com.nick_sib.popularlibraries.mvp.model.repo.retrofit.RetrofitGithubUsers
 import com.nick_sib.popularlibraries.mvp.view.image.GlideImageLoader
 import com.nick_sib.popularlibraries.mvp.presenters.UsersPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
 import com.nick_sib.popularlibraries.ui.adapter.UsersRVAdapter
+import com.nick_sib.popularlibraries.ui.network.AndroidNetworkStatus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -28,12 +32,16 @@ class UsersFragment : MvpAppCompatFragment(), LoadedView {
     private val presenter: UsersPresenter by moxyPresenter {
         UsersPresenter(
             AndroidSchedulers.mainThread(),
-            RetrofitGithubUsers(ApiHolder.api),
+            RetrofitGithubUsers(
+                ApiHolder.api,
+                AndroidNetworkStatus(App.instance.baseContext),
+                RoomGithubUsersCache(Database.instance!!)
+                ),
             App.instance.router)
     }
 
     private val adapter: UsersRVAdapter by lazy {
-        UsersRVAdapter(presenter.usersListPresenter,  GlideImageLoader())
+        UsersRVAdapter(presenter.usersListPresenter,  GlideImageLoader(RoomUserAvatarCache(Database.instance!!)))
     }
 
     override fun onCreateView(
