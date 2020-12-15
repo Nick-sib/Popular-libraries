@@ -18,14 +18,4 @@ class DatabaseModule {
         Database.DB_NAME
     ).build()
 
-
-//    @Singleton
-//    @Provides
-//    fun usersCache(database: Database): IGithubUsersCache = RoomGithubUsersCache(database)
-
-
-//    @Singleton
-//    @Provides
-//    fun userRepositoriesCache(database: Database): IGithubReposCache = RoomGithubReposCache(database)
-
 }

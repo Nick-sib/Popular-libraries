@@ -16,15 +16,6 @@ abstract class Database : RoomDatabase() {
 
     companion object {
         const val DB_NAME = "database.db"
-        var instance: Database? = null
-            get() = field ?: synchronized(Database::class.java) {
-                field = Room.databaseBuilder(App.instance, Database::class.java, DB_NAME)
-                    //.addMigrations(MIGRATION_1_2)
-                    .fallbackToDestructiveMigration()
-                    .build()
-                field
-            }
-            private set
 
 //        private val MIGRATION_1_2 = object : Migration(1, 2) {
 //            override fun migrate(db: SupportSQLiteDatabase) {
