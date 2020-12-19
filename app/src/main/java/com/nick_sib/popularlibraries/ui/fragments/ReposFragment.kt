@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.databinding.FragmentReposBinding
+import com.nick_sib.popularlibraries.di.repository.RepositorySubComponent
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.presenters.ReposPresenter
 import com.nick_sib.popularlibraries.mvp.view.LoadedView
@@ -34,8 +36,13 @@ class ReposFragment : MvpAppCompatFragment(), LoadedView {
         ForksRVAdapter(presenter.repoListPresenter)
     }
 
+    private var repositorySubComponent: RepositorySubComponent? = null
+
     private val presenter: ReposPresenter by moxyPresenter {
-        ReposPresenter(userData)
+        repositorySubComponent = App.instance.initRepositorySubComponent()
+        ReposPresenter(userData).apply {
+            repositorySubComponent?.inject(this)
+        }
     }
 
     override fun onCreateView(
@@ -93,5 +100,11 @@ class ReposFragment : MvpAppCompatFragment(), LoadedView {
     override fun showError(errorText: String) {
         Toast.makeText(context, errorText, Toast.LENGTH_LONG).show()
     }
+
+    override fun release() {
+        repositorySubComponent = null
+        App.instance.releaseRepositorySubComponent()
+    }
+
 
 }

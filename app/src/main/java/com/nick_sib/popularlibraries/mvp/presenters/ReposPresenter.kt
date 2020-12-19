@@ -1,7 +1,6 @@
 package com.nick_sib.popularlibraries.mvp.presenters
 
 
-import com.nick_sib.popularlibraries.App
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubRepository
 import com.nick_sib.popularlibraries.mvp.model.entity.GithubUser
 import com.nick_sib.popularlibraries.mvp.model.repo.IGitUserRepos
@@ -19,18 +18,10 @@ class ReposPresenter(
     private val userData: GithubUser
 ) : MvpPresenter<LoadedView>() {
 
-    init {
-        App.instance.appComponent.inject(this)
-    }
 
-    @Inject
-    lateinit var repos: IGitUserRepos
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var scheduler: Scheduler
+    @Inject lateinit var repos: IGitUserRepos
+    @Inject lateinit var router: Router
+    @Inject lateinit var scheduler: Scheduler
 
     inner class RepoListPresenter : IRepoListPresenter {
         var repos = listOf<GithubRepository>()
@@ -72,6 +63,11 @@ class ReposPresenter(
                 viewState.endLoading()
                 println("Error: ${it.message}")
             })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewState.release()
     }
 
 }

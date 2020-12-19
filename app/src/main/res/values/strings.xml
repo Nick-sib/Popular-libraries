@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Popular libraries</string>
 
-
-    <string name="lesson4">Lesson4</string>
     <string name="github_user_avatar">Github user avatar</string>
     <string name="iv_description">Github user avatar</string>
     <string name="fork_id">ID: %d</string>
